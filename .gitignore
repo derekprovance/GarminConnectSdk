@@ -1,0 +1,11 @@
+# System Specific files
+.DS_Store
+
+# Project
+.env
+
+# IDE Specific
+out/*
+.idea
+*.iml
+target/*
