@@ -8,8 +8,6 @@ I am not affiliated with Garmin, nor do I represent any of Garmin's interests.
 
 Download and include a compiled version of the jar into your local project.
 
-End with an example of getting some data out of the system or using it for a little demo
-
 ### Usage
 
 Create a new instance of the GarminApiService
