@@ -14,7 +14,8 @@ import java.util.Date;
 final class DateTypeAdapter extends TypeAdapter<Date> {
 
     private static final TypeAdapter<Date> dateTypeAdapter = new DateTypeAdapter();
-    private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    private static final SimpleDateFormat timezoneFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    private static final SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
     private DateTypeAdapter() {
     }
@@ -32,7 +33,7 @@ final class DateTypeAdapter extends TypeAdapter<Date> {
             String dateInString = in.nextString();
 
             try {
-                date = formatter.parse(dateInString);
+                date = (dateInString.length() == 10 ? simpleDateFormatter.parse(dateInString) : timezoneFormatter.parse(dateInString));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

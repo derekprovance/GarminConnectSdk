@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class DailySleepDTO {
     private Long id;
-    private String calendarDate;
+    private Date calendarDate;
     private Long sleepTimeSeconds;
     private Long napTimeSeconds;
     private Date sleepStartTimestampGMT;
@@ -26,11 +26,11 @@ public class DailySleepDTO {
         this.id = id;
     }
 
-    public String getCalendarDate() {
+    public Date getCalendarDate() {
         return calendarDate;
     }
 
-    public void setCalendarDate(String calendarDate) {
+    public void setCalendarDate(Date calendarDate) {
         this.calendarDate = calendarDate;
     }
 

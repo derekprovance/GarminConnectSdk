@@ -1,6 +1,6 @@
 package com.derekprovance.garmin.DTO;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class DailyUserSummary {
     private Long userProfileId;
@@ -18,13 +18,13 @@ public class DailyUserSummary {
     private Double wellnessActiveKilocalories;
     private Double netRemainingKilocalories;
     private Long userDailySummaryId;
-    private LocalDate calendarDate;
+    private Date calendarDate;
     private String uuid;
     private Integer dailyStepGoal;
-    private LocalDate wellnessStartTimeGmt;
-    private LocalDate wellnessStartTimeLocal;
-    private LocalDate wellnessEndTimeGmt;
-    private LocalDate wellnessEndTimeLocal;
+    private Date wellnessStartTimeGmt;
+    private Date wellnessStartTimeLocal;
+    private Date wellnessEndTimeGmt;
+    private Date wellnessEndTimeLocal;
     private Long durationInMilliseconds;
     private String wellnessDescription;
     private Integer highlyActiveSeconds;
@@ -192,11 +192,11 @@ public class DailyUserSummary {
         this.userDailySummaryId = userDailySummaryId;
     }
 
-    public LocalDate getCalendarDate() {
+    public Date getCalendarDate() {
         return calendarDate;
     }
 
-    public void setCalendarDate(LocalDate calendarDate) {
+    public void setCalendarDate(Date calendarDate) {
         this.calendarDate = calendarDate;
     }
 
@@ -216,35 +216,35 @@ public class DailyUserSummary {
         this.dailyStepGoal = dailyStepGoal;
     }
 
-    public LocalDate getWellnessStartTimeGmt() {
+    public Date getWellnessStartTimeGmt() {
         return wellnessStartTimeGmt;
     }
 
-    public void setWellnessStartTimeGmt(LocalDate wellnessStartTimeGmt) {
+    public void setWellnessStartTimeGmt(Date wellnessStartTimeGmt) {
         this.wellnessStartTimeGmt = wellnessStartTimeGmt;
     }
 
-    public LocalDate getWellnessStartTimeLocal() {
+    public Date getWellnessStartTimeLocal() {
         return wellnessStartTimeLocal;
     }
 
-    public void setWellnessStartTimeLocal(LocalDate wellnessStartTimeLocal) {
+    public void setWellnessStartTimeLocal(Date wellnessStartTimeLocal) {
         this.wellnessStartTimeLocal = wellnessStartTimeLocal;
     }
 
-    public LocalDate getWellnessEndTimeGmt() {
+    public Date getWellnessEndTimeGmt() {
         return wellnessEndTimeGmt;
     }
 
-    public void setWellnessEndTimeGmt(LocalDate wellnessEndTimeGmt) {
+    public void setWellnessEndTimeGmt(Date wellnessEndTimeGmt) {
         this.wellnessEndTimeGmt = wellnessEndTimeGmt;
     }
 
-    public LocalDate getWellnessEndTimeLocal() {
+    public Date getWellnessEndTimeLocal() {
         return wellnessEndTimeLocal;
     }
 
-    public void setWellnessEndTimeLocal(LocalDate wellnessEndTimeLocal) {
+    public void setWellnessEndTimeLocal(Date wellnessEndTimeLocal) {
         this.wellnessEndTimeLocal = wellnessEndTimeLocal;
     }
 

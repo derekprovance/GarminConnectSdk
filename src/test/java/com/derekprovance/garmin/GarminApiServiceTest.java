@@ -1,25 +1,27 @@
 package com.derekprovance.garmin;
 
+import com.derekprovance.garmin.DTO.DailyHeartRate;
+import com.derekprovance.garmin.DTO.DailyMovementData;
+import com.derekprovance.garmin.DTO.DailyUserSummary;
 import com.derekprovance.garmin.DTO.dailySleepData.DailySleepDTO;
 import com.derekprovance.garmin.DTO.dailySleepData.DailySleepData;
 import com.derekprovance.garmin.DTO.dailySleepData.SleepLevelDTO;
 import com.derekprovance.garmin.DTO.dailySleepData.SleepMovementDTO;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.apache.http.HttpException;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GarminApiServiceTest {
     private Dotenv dotenv = Dotenv.load();
     private GarminApiService garminApiService = new GarminApiService(dotenv.get("USER_ID"), dotenv.get("ACCESS_TOKEN"));
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-    private LocalDate localDate;
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    private LocalDate testDate;
 
     @BeforeEach
     void setUp() {
@@ -27,19 +29,19 @@ class GarminApiServiceTest {
             throw new IllegalArgumentException("Must set TEST_DATE in .env for testing");
         }
 
-        localDate = LocalDate.parse(dotenv.get("TEST_DATE"));
+        testDate = LocalDate.parse(dotenv.get("TEST_DATE"));
 
     }
 
     @org.junit.jupiter.api.Test
-    void getDailySleepData() throws HttpException {
-        DailySleepData dailySleepData = garminApiService.getDailySleepData(localDate);
+    void getDailySleepData() throws Exception {
+        DailySleepData dailySleepData = garminApiService.getDailySleepData(testDate);
 
         assertNotNull(dailySleepData);
 
         DailySleepDTO dailySleepDTO = dailySleepData.getDailySleepDTO();
         assertNotNull(dailySleepDTO);
-        assertEquals(dotenv.get("TEST_DATE"), dailySleepData.getDailySleepDTO().getCalendarDate());
+        assertEquals(testDate.format(dateTimeFormatter), simpleDateFormatter.format(dailySleepData.getDailySleepDTO().getCalendarDate()));
         assertNotNull(dailySleepDTO.getSleepStartTimestampGMT());
         assertNotNull(dailySleepDTO.getSleepEndTimestampGMT());
 
@@ -57,17 +59,39 @@ class GarminApiServiceTest {
     }
 
     @org.junit.jupiter.api.Test
-    void getDailyHrData() {
+    void getDailyHrData() throws Exception {
+        DailyHeartRate dailyHeartRate = garminApiService.getDailyHrData(testDate);
 
+        assertNotNull(dailyHeartRate);
+        assertEquals(testDate.format(dateTimeFormatter), simpleDateFormatter.format(dailyHeartRate.getCalendarDate()));
+        assertNotNull(dailyHeartRate.getStartTimestampGMT());
+        assertNotNull(dailyHeartRate.getEndTimestampGMT());
+        assertNotNull(dailyHeartRate.getStartTimestampLocal());
+        assertNotNull(dailyHeartRate.getEndTimestampLocal());
+        assertNotNull(dailyHeartRate.getMaxHeartRate());
+        assertNotNull(dailyHeartRate.getMinHeartRate());
+        assertTrue(dailyHeartRate.getHeartRateValues().length > 0);
     }
 
     @org.junit.jupiter.api.Test
-    void getDailyMovement() {
+    void getDailyMovement() throws Exception {
+        DailyMovementData dailyMovementData = garminApiService.getDailyMovement(testDate);
 
+        assertNotNull(dailyMovementData);
+        assertNotNull(dailyMovementData.getStartTimestampGMT());
+        assertNotNull(dailyMovementData.getStartTimestampLocal());
+        assertNotNull(dailyMovementData.getEndTimestampGMT());
+        assertNotNull(dailyMovementData.getEndTimestampLocal());
+        assertTrue(dailyMovementData.getMovementValues().length > 0);
     }
 
     @org.junit.jupiter.api.Test
-    void getUserSummary() {
+    void getUserSummary() throws Exception {
+        DailyUserSummary dailyUserSummary = garminApiService.getDailyUserSummary(testDate);
 
+        assertNotNull(dailyUserSummary);
+        assertNotNull(dailyUserSummary.getMinHeartRate());
+        assertNotNull(dailyUserSummary.getMaxHeartRate());
+        assertEquals(testDate.format(dateTimeFormatter), simpleDateFormatter.format(dailyUserSummary.getCalendarDate()));
     }
 }

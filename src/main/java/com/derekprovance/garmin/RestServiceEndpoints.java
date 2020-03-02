@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 enum RestServiceEndpoints {
     DAILY_SLEEP_DATA("/wellness-service/wellness/dailySleepData/%s?date=%s&nonSleepBufferMinutes=60"),
-    DAILY_HR_DATA("/wellness-service/wellness/dailyHeartRate/%s?date=%s7"),
+    DAILY_HR_DATA("/wellness-service/wellness/dailyHeartRate/%s?date=%s"),
     DAILY_MOVEMENT_DATA("/wellness-service/wellness/dailyMovement/%s?calendarDate=%s"),
     DAILY_USER_SUMMARY("/usersummary-service/usersummary/daily/%s?calendarDate=%s");
 

@@ -45,11 +45,11 @@ public class GarminApiService {
         return gson.fromJson(json, DailyMovementData.class);
     }
 
-    public DailyUserSummary getUserSummary(LocalDate date) throws HttpException {
+    public DailyUserSummary getDailyUserSummary(LocalDate date) throws HttpException {
         String endpointUri = RestServiceEndpoints.DAILY_USER_SUMMARY.getUri(apiAuth.getUserId(), date);
         String json = performRequest(endpointUri);
 
-        return gson.fromJson(performRequest(json), DailyUserSummary.class);
+        return gson.fromJson(json, DailyUserSummary.class);
     }
 
     private String performRequest(String uri) throws HttpException {
